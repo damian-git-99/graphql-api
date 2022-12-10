@@ -5,7 +5,8 @@ type Query {
 
 type Mutation {
   signIn(name: String!, password: String!, email: String!): User,
-  logIn(email: String!, password: String!): String
+  logIn(email: String!, password: String!): String,
+  deleteUser(id: ID!): ID!
 }
 
 type User {

@@ -29,6 +29,7 @@ const startApolloServer = async (app) => {
       cors(),
       expressMiddleware(apolloServer, {
         context: async ({ req }) => {
+          // todo move context code
           const token = req.headers.authorization;
 
           if (!token) {
@@ -38,13 +39,13 @@ const startApolloServer = async (app) => {
           }
 
           try {
+            // todo: move to jwtUtils
             const { id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
             return {
               authenticatedUser: id
             };
           } catch (error) {
-            console.log(error);
             return {
               authenticatedUser: false
             };

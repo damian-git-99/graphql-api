@@ -18,6 +18,10 @@ class UserDao {
     return UserModel.findById(id);
   }
 
+  deleteUserById(id){
+    return UserModel.findByIdAndRemove( id );
+  }
+
 }
 
 module.exports = UserDao;

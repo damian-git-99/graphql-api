@@ -63,6 +63,10 @@ class UserService {
   findUserById(id) {
     return userDao.findUserById(id);
   }
+
+  deleteUserById(id) {
+    return userDao.deleteUserById(id);
+  }
 }
 
 module.exports = UserService;
