@@ -1,4 +1,4 @@
-const { rule, shield, not } = require('graphql-shield');
+const { rule, shield, allow } = require('graphql-shield');
 
 const isAuthenticated = rule()((parent, args, { authenticatedUser }) => {
   return authenticatedUser !== false;
@@ -13,8 +13,10 @@ const permissions = shield(
       task: isAuthenticated
     },
     Mutation: {
+      signIn: allow,
+      logIn: allow,
       deleteUser: isAuthenticated,
-      deleteTask: isAuthenticated
+      deleteTask: isAuthenticated,
     },
     User: {
       tasks: isAuthenticated
