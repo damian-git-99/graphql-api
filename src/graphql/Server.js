@@ -41,7 +41,6 @@ const startApolloServer = async (app) => {
           try {
             // todo: move to jwtUtils
             const { id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
             return {
               authenticatedUser: id
             };

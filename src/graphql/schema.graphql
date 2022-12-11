@@ -1,16 +1,32 @@
 type Query {
   user(id: ID!): User,
   users: [User],
+  tasks: [Task]
 }
 
 type Mutation {
   signIn(name: String!, password: String!, email: String!): User,
   logIn(email: String!, password: String!): String,
-  deleteUser(id: ID!): ID!
+  deleteUser(id: ID!): ID!,
+  createTask(taskName: String!, priority: Priority!): Task
 }
 
 type User {
   id: ID!,
   name: String,
   email: String,
+  tasks: [Task]
+}
+
+enum Priority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+type Task {
+  id: ID!,
+  taskName: String!,
+  priority: Priority
+  user: User
 }
