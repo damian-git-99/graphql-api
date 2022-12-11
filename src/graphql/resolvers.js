@@ -3,7 +3,6 @@ const UserService = require('../user/UserService');
 const userService = new UserService();
 const taskService = new TaskService();
 
-// todo delete task
 // todo update task
 // todo update user
 // todo probar toda la app
