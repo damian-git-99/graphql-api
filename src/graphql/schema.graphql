@@ -9,7 +9,8 @@ type Mutation {
   signIn(name: String!, password: String!, email: String!): User,
   logIn(email: String!, password: String!): String,
   deleteUser(id: ID!): ID!,
-  createTask(taskName: String!, priority: Priority!): Task
+  createTask(taskName: String!, priority: Priority!): Task,
+  deleteTask(id: ID!): Task! 
 }
 
 type User {

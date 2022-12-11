@@ -14,6 +14,10 @@ class TaskDao {
     return TaskModel.findById(id);
   }
 
+  deleteTaskById(id){
+    return TaskModel.findByIdAndRemove(id);
+  }
+
 }
 
 module.exports = TaskDao;

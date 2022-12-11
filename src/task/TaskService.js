@@ -1,16 +1,15 @@
-const { GraphQLError } = require("graphql");
-const TaskDao = require("./TaskDao");
+const { GraphQLError } = require('graphql');
+const TaskDao = require('./TaskDao');
 
 const taskDao = new TaskDao();
 
 class TaskService {
-
   createTask(task, authenticatedUser) {
     task.user = authenticatedUser;
     return taskDao.createTask(task);
   }
 
-  findTasksByUser(id){
+  findTasksByUser(id) {
     return taskDao.findTasksByUser(id);
   }
 
@@ -22,14 +21,20 @@ class TaskService {
     }
 
     if (task.user != authenticatedUser) {
-      console.log(task.user.toString(), authenticatedUser)
-      throw new GraphQLError('Forbidden Action');
+      throw new GraphQLError('Forbidden Action', {
+        extensions: {
+          code: 'Forbidden'
+        }
+      });
     }
 
     return task;
-
   }
 
+  async deleteTaskById(id, authenticatedUser) {
+    const task = await this.findTaskById(id, authenticatedUser);
+    return await taskDao.deleteTaskById(task.id);
+  }
 }
 
 module.exports = TaskService;

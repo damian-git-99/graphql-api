@@ -3,6 +3,11 @@ const UserService = require('../user/UserService');
 const userService = new UserService();
 const taskService = new TaskService();
 
+// todo delete task
+// todo update task
+// todo update user
+// todo probar toda la app
+
 const Query = {
   users: async () => await userService.findAllUsers(),
   user: async (root, args) => await userService.findUserById(args.id),
@@ -29,6 +34,9 @@ const Mutation = {
   },
   createTask: async (root, args, { authenticatedUser } ) => {
       return await taskService.createTask(args, authenticatedUser);
+  },
+  deleteTask: async (root, args, {authenticatedUser}) => {
+    return await taskService.deleteTaskById(args.id, authenticatedUser);
   }
 };
 
