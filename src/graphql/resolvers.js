@@ -8,6 +8,9 @@ const Query = {
   user: async (root, args) => await userService.findUserById(args.id),
   tasks: async (root, args, { authenticatedUser }) => {
     return await taskService.findTasksByUser(authenticatedUser);
+  },
+  task: async (root, args, { authenticatedUser }) => {
+    return await taskService.findTaskById(args.id, authenticatedUser);
   } 
 };
 
@@ -35,8 +38,13 @@ const User = {
   }
 }
 
+const Task = {
+  user: async (task) => await userService.findUserById(task.user) 
+}
+
 module.exports = {
   Query,
   Mutation,
-  User
+  User,
+  Task
 };

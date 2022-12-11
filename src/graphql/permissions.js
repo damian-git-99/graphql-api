@@ -9,7 +9,8 @@ const permissions = shield(
     Query: {
       users: isAuthenticated,
       user: isAuthenticated,
-      tasks: isAuthenticated
+      tasks: isAuthenticated,
+      task: isAuthenticated
     },
     Mutation: {
       deleteUser: isAuthenticated

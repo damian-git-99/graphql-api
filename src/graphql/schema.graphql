@@ -1,7 +1,8 @@
 type Query {
   user(id: ID!): User,
   users: [User],
-  tasks: [Task]
+  tasks: [Task],
+  task(id: ID!): Task
 }
 
 type Mutation {

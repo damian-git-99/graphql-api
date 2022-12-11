@@ -10,6 +10,10 @@ class TaskDao {
     return TaskModel.find({ user: id });
   }
 
+  findTaskById(id) {
+    return TaskModel.findById(id);
+  }
+
 }
 
 module.exports = TaskDao;
