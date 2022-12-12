@@ -70,6 +70,10 @@ class UserService {
     }
     return userDao.deleteUserById(id);
   }
+
+  updateUser(user){
+    return userDao.updateUser(user);
+  }
 }
 
 module.exports = UserService;

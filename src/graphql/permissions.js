@@ -16,7 +16,9 @@ const permissions = shield(
       signIn: allow,
       logIn: allow,
       deleteUser: isAuthenticated,
-      deleteTask: isAuthenticated,
+      updateUser: isAuthenticated,
+      createTask: isAuthenticated,
+      deleteTask: isAuthenticated
     },
     User: {
       tasks: isAuthenticated

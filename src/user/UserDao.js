@@ -22,6 +22,10 @@ class UserDao {
     return UserModel.findByIdAndRemove( id );
   }
 
+  updateUser(user){
+    return UserModel.findByIdAndUpdate(user.id, { ...user }, { new: true } )
+  }
+
 }
 
 module.exports = UserDao;

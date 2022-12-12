@@ -26,6 +26,9 @@ const Mutation = {
   deleteUser: async (root, args, { authenticatedUser }) => {
     return await userService.deleteUserById(args.id, authenticatedUser);
   },
+  updateUser: async (root, args) => {
+    return await userService.updateUser({ ...args });
+  },
   createTask: async (root, args, { authenticatedUser } ) => {
       return await taskService.createTask(args, authenticatedUser);
   },
