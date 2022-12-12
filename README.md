@@ -58,7 +58,9 @@ test graphql endpoint
   http://localhost:9000/graphql
 ```
 
-
+1. you have to register a user using the signIn operation.
+2. you have to get a token using the login operation.
+3. test all other operations, sending the token in the http Authorization header.
 
 ## Feedback
 
