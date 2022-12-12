@@ -64,7 +64,10 @@ class UserService {
     return userDao.findUserById(id);
   }
 
-  deleteUserById(id) {
+  deleteUserById(id, authenticatedUser) {
+    if (id != authenticatedUser) {
+      throw new GraphQLError('Forbidden action')
+    }
     return userDao.deleteUserById(id);
   }
 }
