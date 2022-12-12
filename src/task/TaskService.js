@@ -35,6 +35,10 @@ class TaskService {
     const task = await this.findTaskById(id, authenticatedUser);
     return await taskDao.deleteTaskById(task.id);
   }
+
+  updateTask(task){
+    return taskDao.updateTask(task);
+  }
 }
 
 module.exports = TaskService;

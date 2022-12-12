@@ -11,7 +11,8 @@ type Mutation {
   deleteUser(id: ID!): User!,
   updateUser(id: ID!, name: String!, email: String!): User!
   createTask(taskName: String!, priority: Priority!): Task,
-  deleteTask(id: ID!): Task! 
+  deleteTask(id: ID!): Task!,
+  updateTask(id: ID!, taskName: String!, priority: Priority!): Task!
 }
 
 type User {
