@@ -18,8 +18,9 @@ class UserDao {
     return UserModel.findById(id);
   }
 
-  deleteUserById(id){
-    return UserModel.findByIdAndRemove( id );
+  async deleteUserById(id){
+    const user = await this.findUserById(id);
+    return await user.remove();
   }
 
   updateUser(user){
