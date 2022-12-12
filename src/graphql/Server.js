@@ -21,6 +21,27 @@ const schema = applyMiddleware(
   permissions
 );
 
+const context = async ({ req }) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return {
+      authenticatedUser: false
+    };
+  }
+
+  try {
+    const { id } = verifyToken(token);
+    return {
+      authenticatedUser: id
+    };
+  } catch (error) {
+    return {
+      authenticatedUser: false
+    };
+  }
+};
+
 const startApolloServer = async (app) => {
   try {
     const apolloServer = new ApolloServer({ schema });
@@ -29,27 +50,7 @@ const startApolloServer = async (app) => {
       '/graphql',
       cors(),
       expressMiddleware(apolloServer, {
-        context: async ({ req }) => {
-          // todo move context code
-          const token = req.headers.authorization;
-
-          if (!token) {
-            return {
-              authenticatedUser: false
-            };
-          }
-
-          try {
-            const { id } = verifyToken(token);
-            return {
-              authenticatedUser: id
-            };
-          } catch (error) {
-            return {
-              authenticatedUser: false
-            };
-          }
-        }
+        context
       })
     );
     console.log('Apollo server started correctly on path /graphql'.bgCyan);
