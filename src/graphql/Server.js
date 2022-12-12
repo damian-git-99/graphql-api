@@ -4,7 +4,6 @@ const { applyMiddleware } = require('graphql-middleware');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
 
 const pathFile = path.join(__dirname, 'schema.graphql');
 const typeDefs = fs.readFileSync(pathFile, { encoding: 'utf-8' });
