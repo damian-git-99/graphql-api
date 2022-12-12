@@ -11,6 +11,7 @@ const typeDefs = fs.readFileSync(pathFile, { encoding: 'utf-8' });
 const resolvers = require('./resolvers');
 const { makeExecutableSchema } = require('graphql-tools');
 const { permissions } = require('./permissions');
+const { verifyToken } = require('../utils/jwtUtils');
 
 const schema = applyMiddleware(
   makeExecutableSchema({
@@ -39,8 +40,7 @@ const startApolloServer = async (app) => {
           }
 
           try {
-            // todo: move to jwtUtils
-            const { id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
+            const { id } = verifyToken(token);
             return {
               authenticatedUser: id
             };
