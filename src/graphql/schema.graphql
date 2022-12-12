@@ -8,7 +8,7 @@ type Query {
 type Mutation {
   signIn(name: String!, password: String!, email: String!): User,
   logIn(email: String!, password: String!): String,
-  deleteUser(id: ID!): ID!,
+  deleteUser(id: ID!): User!,
   createTask(taskName: String!, priority: Priority!): Task,
   deleteTask(id: ID!): Task! 
 }
