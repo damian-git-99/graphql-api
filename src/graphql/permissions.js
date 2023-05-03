@@ -13,7 +13,7 @@ const permissions = shield(
       task: isAuthenticated
     },
     Mutation: {
-      signIn: allow,
+      signup: allow,
       logIn: allow,
       deleteUser: isAuthenticated,
       updateUser: isAuthenticated,

@@ -9,7 +9,7 @@ const BadCredentials = require('./errors/BadCredentials');
 const userDao = new UserDao();
 
 class UserService {
-  async signIn(user) {
+  async signup(user) {
     const { name, email, password } = user;
     const userExists = await this.findUserByEmail(email);
 

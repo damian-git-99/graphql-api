@@ -15,8 +15,8 @@ const Query = {
 };
 
 const Mutation = {
-  signIn: async (root, args) => {
-    const user = await userService.signIn(args);
+  signup: async (root, args) => {
+    const user = await userService.signup(args);
     return user;
   },
   logIn: async (root, args) => {
