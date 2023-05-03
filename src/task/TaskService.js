@@ -1,5 +1,5 @@
-const { GraphQLError } = require('graphql');
 const TaskDao = require('./TaskDao');
+const TaskNotFound = require('./errors/TaskNotFound');
 
 const taskDao = new TaskDao();
 
@@ -17,15 +17,11 @@ class TaskService {
     const task = await taskDao.findTaskById(id);
 
     if (!task) {
-      throw new GraphQLError(`Task ${id} Not Found`);
+      throw new TaskNotFound('Task not found');
     }
 
     if (task.user != authenticatedUser) {
-      throw new GraphQLError('Forbidden Action', {
-        extensions: {
-          code: 'Forbidden'
-        }
-      });
+      throw new ForbiddenAction('Forbidden action');
     }
 
     return task;
