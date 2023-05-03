@@ -1,12 +1,11 @@
-const { GraphQLError } = require('graphql');
 const validator = require('validator');
 const { encryptPassword, comparePasswords } = require('../utils/bcryptUtils');
 const { generateToken } = require('../utils/jwtUtils');
 const UserDao = require('./UserDao');
-
-const extensions = {
-  code: 'BAD_REQUEST'
-};
+const EmailAlreadyTaken = require('./errors/EmailAlreadyTaken');
+const InvalidInput = require('./errors/InvalidInput');
+const ForbiddenAction = require('../task/errors/ForbiddenAction');
+const BadCredentials = require('./errors/BadCredentials');
 const userDao = new UserDao();
 
 class UserService {
@@ -15,11 +14,11 @@ class UserService {
     const userExists = await this.findUserByEmail(email);
 
     if (!validator.isEmail(email)) {
-      throw new GraphQLError(`${email} is not a valid email`, { extensions });
+      throw new InvalidInput(`${email} is not a valid email`);
     }
 
     if (userExists) {
-      throw new GraphQLError(`Email: ${email} Already taken`, { extensions });
+      throw new EmailAlreadyTaken(`Email: ${email} Already taken`);
     }
 
     const encryptedPassword = encryptPassword(password);
@@ -36,15 +35,11 @@ class UserService {
     const userExists = await this.findUserByEmail(email);
 
     if (!userExists) {
-      throw new GraphQLError(`Error: Invalid Password or email`, {
-        extensions
-      });
+      throw new BadCredentials(`Error: Invalid Password or email`);
     }
 
     if (!comparePasswords(password, userExists.password)) {
-      throw new GraphQLError(`Error: Invalid Password or email`, {
-        extensions
-      });
+      throw new BadCredentials(`Error: Invalid Password or email`);
     }
 
     const token = generateToken({ id: userExists.id });
@@ -66,7 +61,7 @@ class UserService {
 
   deleteUserById(id, authenticatedUser) {
     if (id != authenticatedUser) {
-      throw new GraphQLError('Forbidden action')
+      throw new ForbiddenAction('Forbidden action');
     }
     return userDao.deleteUserById(id);
   }
